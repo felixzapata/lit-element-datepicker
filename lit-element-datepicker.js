@@ -621,7 +621,8 @@ class LitElementDatepicker extends LitElement {
     * @method _setSelectedDate
   * */
   _setSelectedDate(curDay) {
-    this.set('date', moment([this.year, this.month, curDay.innerText]).format());
+    this.date = moment([this.year, this.month, curDay.innerText]).format();
+    this.dispatchEvent(new window.CustomEvent('date-changed', { composed: true, bubbles: true, detail: this.date }));
   }
 
   /**
