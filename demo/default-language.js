@@ -16,7 +16,7 @@ class DefaultLanguage extends LitElement {
       <div role="application">
         <label for="date">Date:</label>
         <input id="date" type="text" />
-        <button type="button" @click="${this.openCalendarHandler}">Select Date...</button>
+        <button type="button" @click="${this._openCalendar}">Select Date...</button>
       </div>
       <lit-element-datepicker id="datePicker"></lit-element-datepicker>
     `;
@@ -34,7 +34,6 @@ class DefaultLanguage extends LitElement {
     this.shadowRoot.querySelector('#datePicker').showDlg();
   }
   firstUpdated() {
-    this.openCalendarHandler = this._openCalendar.bind(this);
     this.dateChangedHandler = this._dateChanged.bind(this);
     this.shadowRoot.addEventListener('date-changed', this.dateChangedHandler);
   }
