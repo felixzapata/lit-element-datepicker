@@ -11,6 +11,12 @@ class LitElementDatepicker extends LitElement {
 
   static get properties() {
     return {
+       /**
+       * True if datepicker should appear in a modal dialog box.
+       */
+      bModal: {
+        type: Boolean
+      },
       /**
        * The selected date
        * Based on ISO 8601
@@ -191,6 +197,41 @@ class LitElementDatepicker extends LitElement {
   `;
   }
 
+  constructor() {
+    super();
+    this.bModal = false;
+    this.locale = 'en';
+    this.initDate = '';
+    this.endDate = '';
+    this.minDate = '';
+    this.maxDate = '';
+
+    // bind button handlers
+    this._handlePrevClick = this._handlePrevClick.bind(this);
+    this._handleNextClick = this._handleNextClick.bind(this);
+    this._handlePrevKeyDown = this._handlePrevKeyDown.bind(this);
+    this._handleNextKeyDown = this._handleNextKeyDown.bind(this);
+    this._handleGridKeyDown = this._handleGridKeyDown.bind(this);
+    this._handleGridKeyPress = this._handleGridKeyPress.bind(this);
+    this._handleGridFocus = this._handleGridFocus.bind(this);
+    this._handleGridBlur = this._handleGridBlur.bind(this);
+
+    this.keys = {
+      tab: 9,
+      enter: 13,
+      esc: 27,
+      space: 32,
+      pageup: 33,
+      pagedown: 34,
+      end: 35,
+      home: 36,
+      left: 37,
+      up: 38,
+      right: 39,
+      down: 40
+    };
+  }
+
   _renderCalendar() {
     this.dateObj = (this.initDate !== '') ? moment(this.initDate) : moment();
 
@@ -224,31 +265,6 @@ class LitElementDatepicker extends LitElement {
     this.$prev = this.$id.querySelector('#bn_prev');
     this.$next = this.$id.querySelector('#bn_next');
     this.$grid = this.$id.querySelector('#cal');
-
-    // bind button handlers
-    this._handlePrevClick = this._handlePrevClick.bind(this);
-    this._handleNextClick = this._handleNextClick.bind(this);
-    this._handlePrevKeyDown = this._handlePrevKeyDown.bind(this);
-    this._handleNextKeyDown = this._handleNextKeyDown.bind(this);
-    this._handleGridKeyDown = this._handleGridKeyDown.bind(this);
-    this._handleGridKeyPress = this._handleGridKeyPress.bind(this);
-    this._handleGridFocus = this._handleGridFocus.bind(this);
-    this._handleGridBlur = this._handleGridBlur.bind(this);
-
-    this.keys = {
-      tab: 9,
-      enter: 13,
-      esc: 27,
-      space: 32,
-      pageup: 33,
-      pagedown: 34,
-      end: 35,
-      home: 36,
-      left: 37,
-      up: 38,
-      right: 39,
-      down: 40
-    };
 
     if(this.maxDate !== '') {
       this.maxDateMoment = moment(this.maxDate);
