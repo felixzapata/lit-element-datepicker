@@ -30,13 +30,8 @@ class LitElementDatepicker extends LitElement {
        * Based on Moment.js
        * https://momentjs.com/docs/#/i18n/
        */
-      locale: {
-        type: String,
-        hasChanged(newVal, oldVal) {
-          if (newVal > oldVal) {
-            this._localeChanged(newVal);
-          }
-        }
+      _locale: {
+        type: String
       },
       /**
        * Optional init date for the calendar
@@ -213,7 +208,7 @@ class LitElementDatepicker extends LitElement {
   `;
   }
 
-  _localeChanged(locale) {
+  _localizeCalendar(locale) {
     var localeMoment = moment();
     var weekdays = [];
     var months = [];
@@ -230,6 +225,15 @@ class LitElementDatepicker extends LitElement {
     this.dayNames = weekdays;
     this.dayNamesAbbr = weekdaysAbbr;
     this.monthNames = months;
+  }
+
+  get locale() {
+    return this._locale;
+  }
+
+  set locale(locale) {
+    this._locale = locale;
+    this._localizeCalendar(locale);
   }
 
   _initDateChanged() {
