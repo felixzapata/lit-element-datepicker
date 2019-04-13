@@ -1,13 +1,6 @@
 # \<lit-element-datepicker\>
 LitElement component based on the accessible [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
 
-```html
-  <label id="date_label" for="date">Date</label>:
-  <input id="date" type="text" value="[[datepickerValue]]" />
-  <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button>
-  <lit-element-datepicker id="datePicker" date="{{datepickerValue}}"></lit-element-datepicker>
-```
-
 ## Installation
 
 ```sh
