@@ -42,7 +42,19 @@ class LitElementDatepicker extends LitElement {
       initDate: {
         type: String,
         value: '',
-        attribute: 'init-date'
+        attribute: 'init-date',
+        /**
+         * Compare myProp's new value with its old value.
+         * Only consider myProp to have changed if newVal is larger than
+         * oldVal.
+         */
+        hasChanged(newVal, oldVal) {
+          if (newVal > oldVal) {
+            this._unBindHandlers();
+            this._unBindCellsClickHandlers();
+            this._renderCalendar();
+          }
+        }
       },
       /**
        * Optional min date for the calendar
@@ -216,6 +228,14 @@ class LitElementDatepicker extends LitElement {
     this.monthNames = months;
   }
 
+  set minDate(minDate) {
+    if(minDate !== '') {
+      this.minDateMoment = moment(minDate);
+      this._checkDatesRange();
+      this._updateAvailableDays();
+    }
+  }
+
   constructor() {
     super();
     this.bModal = false;
@@ -312,26 +332,6 @@ class LitElementDatepicker extends LitElement {
     super.disconnectedCallback();
     this._unBindHandlers();
     this._unBindCellsClickHandlers();
-  }
-
-  _initDateChanged(newInitDate, oldInitDate) {
-    if(typeof oldInitDate !== 'undefined' && newInitDate !== oldInitDate) {
-      /* Polymer.RenderStatus.afterNextRender(this, function() {
-        this._unBindHandlers();
-        this._unBindCellsClickHandlers();
-        this._renderCalendar();
-      }); */
-    }
-  }
-
-  _minDateChanged(minDate) {
-    if(minDate !== '') {
-      this.minDateMoment = moment(minDate);
-      /* Polymer.RenderStatus.afterNextRender(this, function() {
-        this._checkDatesRange();
-        this._updateAvailableDays();
-      }); */
-    }
   }
 
   /**
