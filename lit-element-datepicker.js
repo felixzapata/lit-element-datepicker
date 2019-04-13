@@ -197,6 +197,25 @@ class LitElementDatepicker extends LitElement {
   `;
   }
 
+  set locale(locale) {
+    var localeMoment = moment();
+    var weekdays = [];
+    var months = [];
+    var weekdaysAbbr = [];
+    var i = 0;
+    localeMoment.locale(locale);
+    for(; i < 7; i++) {
+      weekdays.push(localeMoment.weekday(i).format('dddd'));
+      weekdaysAbbr.push(localeMoment.weekday(i).format('dd'));
+    }
+    for(i = 0; i < 12; i++) {
+      months.push(localeMoment.month(i).format('MMMM'));
+    }
+    this.dayNames = weekdays;
+    this.dayNamesAbbr = weekdaysAbbr;
+    this.monthNames = months;
+  }
+
   constructor() {
     super();
     this.bModal = false;
@@ -432,30 +451,6 @@ class LitElementDatepicker extends LitElement {
       active = 'day' + days[i].firstChild.nodeValue;
     }
     this.$grid.setAttribute('aria-activedescendant', active);
-  }
-
-  //
-  // _localeChanged() is a member function to localize the months and the days of the week using Moment.js
-  //
-  // @return N/A
-  //
-  _localeChanged(locale) {
-    var localeMoment = moment();
-    var weekdays = [];
-    var months = [];
-    var weekdaysAbbr = [];
-    var i = 0;
-    localeMoment.locale(locale);
-    for(; i < 7; i++) {
-      weekdays.push(localeMoment.weekday(i).format('dddd'));
-      weekdaysAbbr.push(localeMoment.weekday(i).format('dd'));
-    }
-    for(i = 0; i < 12; i++) {
-      months.push(localeMoment.month(i).format('MMMM'));
-    }
-    this.dayNames = weekdays;
-    this.dayNamesAbbr = weekdaysAbbr;
-    this.monthNames = months;
   }
 
   //
