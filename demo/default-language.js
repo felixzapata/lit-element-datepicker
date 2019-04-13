@@ -15,10 +15,10 @@ class DefaultLanguage extends LitElement {
     return html`
       <div role="application">
         <label for="date">Date:</label>
-        <input id="date" type="text" value="${dateFormat(datePickerValue, 'L')}" />
-        <button type="button">Select Date...</button>
+        <input id="date" type="text" />
+        <button type="button" @click="${this.openCalendarHandler}">Select Date...</button>
       </div>
-      <lit-element-datepicker id="datePicker" date="${datePickerValue}"></lit-element-datepicker> 
+      <lit-element-datepicker id="datePicker"></lit-element-datepicker>
     `;
   }
   dateFormat(date, format) {
@@ -27,17 +27,20 @@ class DefaultLanguage extends LitElement {
     }
     return '';
   }
+  _dateChanged(event) {
+    this.shadowRoot.querySelector('#date').value = this.dateFormat(event.detail, 'L');
+  }
   _openCalendar() {
     this.shadowRoot.querySelector('#datePicker').showDlg();
   }
   firstUpdated() {
     this.openCalendarHandler = this._openCalendar.bind(this);
-    this.shadowRoot.querySelector('button').addEventListener('click', this.openCalendarHandler);
+    this.dateChangedHandler = this._dateChanged.bind(this);
+    this.shadowRoot.addEventListener('date-changed', this.dateChangedHandler);
   }
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.openCalendarHandler = this._openCalendar.bind(this);
-    this.shadowRoot.querySelector('button').addEventListener('click', this.openCalendarHandler);
+    this.shadowRoot.removeEventListener('date-changed', this.dateChangedHandler);
   }
 }
 customElements.define('default-language', DefaultLanguage);
