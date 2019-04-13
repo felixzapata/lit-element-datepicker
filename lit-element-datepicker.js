@@ -175,9 +175,9 @@ class LitElementDatepicker extends LitElement {
     return html`
     <div id="dp1" class="datepicker" aria-hidden="true">
       <div id="month-wrap">
-        <div id="bn_prev" role="button" aria-labelledby="bn_prev-label" tabindex="0"><img class="bn_img" src="./images/prev.png" alt="" /></div>
+        <div id="bn_prev" role="button" aria-labelledby="bn_prev-label" tabindex="0"><img class="bn_img" src="/images/prev.png" alt="" /></div>
         <div id="month" role="heading" aria-live="assertive" aria-atomic="true"></div>
-        <div id="bn_next" role="button" aria-labelledby="bn_next-label" tabindex="0"><img class="bn_img" src="./images/next.png" alt="" /></div>
+        <div id="bn_next" role="button" aria-labelledby="bn_next-label" tabindex="0"><img class="bn_img" src="/images/next.png" alt="" /></div>
       </div>
       <table id="cal" role="grid" aria-labelledby="month" tabindex="0">
         <thead>
