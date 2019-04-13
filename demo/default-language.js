@@ -6,10 +6,13 @@ class DefaultLanguage extends LitElement {
   static get properties() {
     return {
       datePickerValue: {
-        type: String,
-        value: ''
+        type: String
       }
     };
+  }
+  constructor() {
+    super();
+    this.datePickerValue = '';
   }
   render() {
     return html`
