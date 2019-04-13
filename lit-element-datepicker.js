@@ -5,6 +5,7 @@
  *
  */
 import { LitElement, css, html } from 'lit-element';
+import moment from 'moment';
 
 class LitElementDatepicker extends LitElement {
 
@@ -191,7 +192,7 @@ class LitElementDatepicker extends LitElement {
   }
 
   _renderCalendar() {
-    this.dateObj = (this.initDate !== '') ? window.moment(this.initDate) : window.moment();
+    this.dateObj = (this.initDate !== '') ? moment(this.initDate) : moment();
 
     this.curYear = this.dateObj.year();
     this.year = this.curYear;
@@ -250,11 +251,11 @@ class LitElementDatepicker extends LitElement {
     };
 
     if(this.maxDate !== '') {
-      this.maxDateMoment = window.moment(this.maxDate);
+      this.maxDateMoment = moment(this.maxDate);
     }
 
     if(this.minDate !== '') {
-      this.minDateMoment = window.moment(this.minDate);
+      this.minDateMoment = moment(this.minDate);
     }
     this._renderCalendar();
 
@@ -290,7 +291,7 @@ class LitElementDatepicker extends LitElement {
 
   _minDateChanged(minDate) {
     if(minDate !== '') {
-      this.minDateMoment = window.moment(minDate);
+      this.minDateMoment = moment(minDate);
       /* Polymer.RenderStatus.afterNextRender(this, function() {
         this._checkDatesRange();
         this._updateAvailableDays();
@@ -423,7 +424,7 @@ class LitElementDatepicker extends LitElement {
   // @return N/A
   //
   _localeChanged(locale) {
-    var localeMoment = window.moment();
+    var localeMoment = moment();
     var weekdays = [];
     var months = [];
     var weekdaysAbbr = [];
@@ -457,7 +458,7 @@ class LitElementDatepicker extends LitElement {
   // @return (integer) number representing the day of the week (0=Sunday....6=Saturday)
   //
   _calcStartWeekday(year, month) {
-    return window.moment(new Date(year, month, 1)).locale(this.locale).weekday();
+    return moment(new Date(year, month, 1)).locale(this.locale).weekday();
   }
 
   //
@@ -595,7 +596,7 @@ class LitElementDatepicker extends LitElement {
     * @method _setSelectedDate
   * */
   _setSelectedDate(curDay) {
-    this.set('date', window.moment([this.year, this.month, curDay.innerText]).format());
+    this.set('date', moment([this.year, this.month, curDay.innerText]).format());
   }
 
   /**
