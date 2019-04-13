@@ -11,7 +11,7 @@ class LitElementDatepicker extends LitElement {
 
   static get properties() {
     return {
-       /**
+      /**
        * True if datepicker should appear in a modal dialog box.
        */
       bModal: {
@@ -32,7 +32,11 @@ class LitElementDatepicker extends LitElement {
        */
       locale: {
         type: String,
-        value: 'en'
+        hasChanged(newVal, oldVal) {
+          if (newVal > oldVal) {
+            this._localeChanged(newVal);
+          }
+        }
       },
       /**
        * Optional init date for the calendar
@@ -41,7 +45,6 @@ class LitElementDatepicker extends LitElement {
        */
       initDate: {
         type: String,
-        value: '',
         attribute: 'init-date',
         /**
          * Compare myProp's new value with its old value.
@@ -49,10 +52,8 @@ class LitElementDatepicker extends LitElement {
          * oldVal.
          */
         hasChanged(newVal, oldVal) {
-          if (newVal > oldVal) {
-            this._unBindHandlers();
-            this._unBindCellsClickHandlers();
-            this._renderCalendar();
+          if(newVal > oldVal) {
+            this._initDateChanged(newVal);
           }
         }
       },
@@ -63,8 +64,12 @@ class LitElementDatepicker extends LitElement {
        */
       minDate: {
         type: String,
-        value: '',
         attribute: 'min-date',
+        hasChanged(newVal, oldVal) {
+          if(newVal > oldVal) {
+            this._minDateChanged(newVal);
+          }
+        }
       },
       /**
        * Optional max date for the calendar
@@ -73,8 +78,7 @@ class LitElementDatepicker extends LitElement {
        */
       maxDate: {
         type: String,
-        value: '',
-        attribute: 'max-date',
+        attribute: 'max-date'
       }
     };
   }
@@ -209,7 +213,7 @@ class LitElementDatepicker extends LitElement {
   `;
   }
 
-  set locale(locale) {
+  _localeChanged(locale) {
     var localeMoment = moment();
     var weekdays = [];
     var months = [];
@@ -228,7 +232,13 @@ class LitElementDatepicker extends LitElement {
     this.monthNames = months;
   }
 
-  set minDate(minDate) {
+  _initDateChanged() {
+    this._unBindHandlers();
+    this._unBindCellsClickHandlers();
+    this._renderCalendar();
+  }
+
+  _minDateChanged(minDate) {
     if(minDate !== '') {
       this.minDateMoment = moment(minDate);
       this._checkDatesRange();
