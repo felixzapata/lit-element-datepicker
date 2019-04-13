@@ -1,4 +1,5 @@
-import { LitElement } from 'lit-element';
+import { LitElement, html } from 'lit-element';
+import moment from 'moment';
 import '../lit-element-datepicker.js';
 
 class DefaultLanguage extends LitElement {
@@ -22,7 +23,7 @@ class DefaultLanguage extends LitElement {
   }
   dateFormat(date, format) {
     if(date !== '') {
-      return window.moment(date).format(format);
+      return moment(date).format(format);
     }
     return '';
   }
