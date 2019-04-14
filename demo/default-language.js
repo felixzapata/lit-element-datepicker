@@ -3,17 +3,6 @@ import moment from 'moment';
 import '../lit-element-datepicker.js';
 
 class DefaultLanguage extends LitElement {
-  static get properties() {
-    return {
-      datePickerValue: {
-        type: String
-      }
-    };
-  }
-  constructor() {
-    super();
-    this.datePickerValue = '';
-  }
   render() {
     return html`
       <div role="application">

@@ -2,18 +2,7 @@ import { LitElement, html } from 'lit-element';
 import moment from 'moment';
 import '../lit-element-datepicker.js';
 
-class UsingLocale extends LitElement {
-  static get properties() {
-    return {
-      locale: {
-        type: String
-      }
-    };
-  }
-  constructor() {
-    super();
-    this.locale = 'es';
-  }
+class InitMaxDate extends LitElement {
   render() {
     return html`
       <div role="application">
@@ -21,7 +10,7 @@ class UsingLocale extends LitElement {
         <input id="date" type="text" />
         <button type="button" @click="${this._openCalendar}">Select Date...</button>
       </div>
-      <lit-element-datepicker id="datePicker" locale="${this.locale}"></lit-element-datepicker>
+      <lit-element-datepicker id="datePicker" locale="es" init-date="2013-03-08" min-date="2013-02-11" max-date="2013-04-08"></lit-element-datepicker>
     `;
   }
   dateFormat(date, format) {
@@ -45,4 +34,4 @@ class UsingLocale extends LitElement {
     this.shadowRoot.removeEventListener('date-changed', this.dateChangedHandler);
   }
 }
-customElements.define('using-locale', UsingLocale);
+customElements.define('init-max-date', InitMaxDate);
