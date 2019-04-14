@@ -23,14 +23,14 @@ class LitElementDatepicker extends LitElement {
        * http://momentjs.com/docs/#/parsing/
        */
       date: {
-        type: String,
+        type: String
       },
       /**
        * Localize the calendar.
        * Based on Moment.js
        * https://momentjs.com/docs/#/i18n/
        */
-      _locale: {
+      locale: {
         type: String
       },
       /**
@@ -40,17 +40,7 @@ class LitElementDatepicker extends LitElement {
        */
       initDate: {
         type: String,
-        attribute: 'init-date',
-        /**
-         * Compare myProp's new value with its old value.
-         * Only consider myProp to have changed if newVal is larger than
-         * oldVal.
-         */
-        hasChanged(newVal, oldVal) {
-          if(newVal > oldVal) {
-            this._initDateChanged(newVal);
-          }
-        }
+        attribute: 'init-date'
       },
       /**
        * Optional min date for the calendar
@@ -59,12 +49,7 @@ class LitElementDatepicker extends LitElement {
        */
       minDate: {
         type: String,
-        attribute: 'min-date',
-        hasChanged(newVal, oldVal) {
-          if(newVal > oldVal) {
-            this._minDateChanged(newVal);
-          }
-        }
+        attribute: 'min-date'
       },
       /**
        * Optional max date for the calendar
@@ -208,55 +193,13 @@ class LitElementDatepicker extends LitElement {
   `;
   }
 
-  _localizeCalendar(locale) {
-    var localeMoment = moment();
-    var weekdays = [];
-    var months = [];
-    var weekdaysAbbr = [];
-    var i = 0;
-    localeMoment.locale(locale);
-    for(; i < 7; i++) {
-      weekdays.push(localeMoment.weekday(i).format('dddd'));
-      weekdaysAbbr.push(localeMoment.weekday(i).format('dd'));
-    }
-    for(i = 0; i < 12; i++) {
-      months.push(localeMoment.month(i).format('MMMM'));
-    }
-    this.dayNames = weekdays;
-    this.dayNamesAbbr = weekdaysAbbr;
-    this.monthNames = months;
-  }
-
-  get locale() {
-    return this._locale;
-  }
-
-  set locale(locale) {
-    this._locale = locale;
-    this._localizeCalendar(locale);
-  }
-
-  _initDateChanged() {
-    this._unBindHandlers();
-    this._unBindCellsClickHandlers();
-    this._renderCalendar();
-  }
-
-  _minDateChanged(minDate) {
-    if(minDate !== '') {
-      this.minDateMoment = moment(minDate);
-      this._checkDatesRange();
-      this._updateAvailableDays();
-    }
-  }
-
   constructor() {
     super();
     this.bModal = false;
-    this.locale = 'en';
-    this.initDate = '';
+    this._locale = 'en';
+    this._initDate = '';
     this.endDate = '';
-    this.minDate = '';
+    this._minDate = '';
     this.maxDate = '';
 
     // bind button handlers
@@ -283,6 +226,79 @@ class LitElementDatepicker extends LitElement {
       right: 39,
       down: 40
     };
+  }
+
+  /**
+  * Custom getters and setters
+  */
+  get initDate() {
+    return this._initDate;
+  }
+
+  set initDate(initDate) {
+    var oldVal = this._initDate;
+    this._initDate = initDate;
+    this._initDateChanged(initDate);
+    this.requestUpdate('initDate', oldVal);
+  }
+
+  get minDate() {
+    return this._minDate;
+  }
+
+  set minDate(minDate) {
+    var oldVal = this._minDate;
+    this._minDate = minDate;
+    this._minDateChanged(minDate);
+    this.requestUpdate('minDate', oldVal);
+  }
+
+  get locale() {
+    return this._locale;
+  }
+
+  set locale(locale) {
+    var oldVal = this._locale;
+    this._locale = locale;
+    this._localizeCalendar(locale);
+    this.requestUpdate('locale', oldVal);
+    
+  }
+  /**
+  * End custom getters and setters
+  */
+
+  _localizeCalendar(locale) {
+    var localeMoment = moment();
+    var weekdays = [];
+    var months = [];
+    var weekdaysAbbr = [];
+    var i = 0;
+    localeMoment.locale(locale);
+    for(; i < 7; i++) {
+      weekdays.push(localeMoment.weekday(i).format('dddd'));
+      weekdaysAbbr.push(localeMoment.weekday(i).format('dd'));
+    }
+    for(i = 0; i < 12; i++) {
+      months.push(localeMoment.month(i).format('MMMM'));
+    }
+    this.dayNames = weekdays;
+    this.dayNamesAbbr = weekdaysAbbr;
+    this.monthNames = months;
+  }
+
+  _initDateChanged() {
+    this._unBindHandlers();
+    this._unBindCellsClickHandlers();
+    this._renderCalendar();
+  }
+
+  _minDateChanged(minDate) {
+    if(minDate !== '') {
+      this.minDateMoment = moment(minDate);
+      this._checkDatesRange();
+      this._updateAvailableDays();
+    }
   }
 
   _renderCalendar() {
