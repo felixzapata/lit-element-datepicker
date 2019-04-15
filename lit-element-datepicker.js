@@ -196,10 +196,10 @@ class LitElementDatepicker extends LitElement {
   constructor() {
     super();
     this.bModal = false;
-    this._locale = 'en';
-    this._initDate = '';
+    this.locale = 'en';
+    this.initDate = '';
     this.endDate = '';
-    this._minDate = '';
+    this.minDate = '';
     this.maxDate = '';
 
     // bind button handlers
@@ -238,7 +238,9 @@ class LitElementDatepicker extends LitElement {
   set initDate(initDate) {
     var oldVal = this._initDate;
     this._initDate = initDate;
-    this._initDateChanged(initDate);
+    if(typeof oldVal !== 'undefined' && initDate !== oldVal) {
+      this._initDateChanged(initDate);
+    }
     this.requestUpdate('initDate', oldVal);
   }
 
@@ -258,11 +260,11 @@ class LitElementDatepicker extends LitElement {
   }
 
   set locale(locale) {
-    var oldVal = this._locale;
-    this._locale = locale;
+    // var oldVal = this._locale;
+    var oldVal = this.locale;
+    // this._locale = locale;
     this._localizeCalendar(locale);
     this.requestUpdate('locale', oldVal);
-    
   }
   /**
   * End custom getters and setters
