@@ -1,6 +1,6 @@
 {
   "name": "lit-element-datepicker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "LitElement component component based on the accessible Date Picker from Open Ajax Alliance",
   "main": "lit-element-datepicker.js",
   "module": "lit-element-datepicker.js",
