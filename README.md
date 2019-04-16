@@ -1,5 +1,5 @@
 # \<lit-element-datepicker\>
-LitElement component based on the accessible [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
+LitElement component based on the [polymer-openajax-datepicker](https://github.com/felixzapata/polymer-openajax-datepicker).
 
 ## Installation
 
