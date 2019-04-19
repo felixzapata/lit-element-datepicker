@@ -58,16 +58,6 @@ Optional max date for the calendar, based on ISO 8601
 + Add more custom CSS properties.
 + Set focus on the focus target.
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
-```
-$ polymer serve
-```
-
 ## Contributing
 
 1. Fork it!
