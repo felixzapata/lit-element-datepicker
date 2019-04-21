@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 import moment from 'moment';
-import '../lit-element-datepicker.js';
+import '../src/lit-element-datepicker.js';
 
 class InitDate extends LitElement {
   render() {
