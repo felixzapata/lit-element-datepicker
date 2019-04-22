@@ -147,9 +147,9 @@ export default class LitElementDatepicker extends LitElement {
   }
 
   set locale(locale) {
-    // var oldVal = this._locale;
-    var oldVal = this.locale;
-    // this._locale = locale;
+    var oldVal = this._locale;
+    // var oldVal = this.locale;
+    this._locale = locale;
     this._localizeCalendar(locale);
     this.requestUpdate('locale', oldVal);
   }
