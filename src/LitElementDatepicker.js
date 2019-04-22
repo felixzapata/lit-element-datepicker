@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit-element';
 import { litElementDatepickerStyle } from './lit-element-datepicker.style.js';
+import moment from 'moment';
 
 export default class LitElementDatepicker extends LitElement {
 
