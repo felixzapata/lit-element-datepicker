@@ -1,25 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
+    />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>lit-element-datepicker demo</title>
 
-  <title>lit-element-datepicker demo</title>
+    <script type="module" src="./default-language.ts"></script>
+  </head>
 
-</head>
-
-<body>
-  <div id="demo"></div>
-
-  <script type="module">
-    import { html, render } from 'https://unpkg.com/lit-html?module'; // workaround until owc-dev-server supports html
-    import './default-language.js';
-    render(html`
-    <h1>Example 1: Default language</h1>  
-    <default-language></default-language>
-    `, document.querySelector('#demo'));
-  </script>
-</body>
-
+  <body>
+    <div id="demo">
+      <h1>Example 1: Default language</h1>
+      <default-language></default-language>
+    </div>
+  </body>
 </html>

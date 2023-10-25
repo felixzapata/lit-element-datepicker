@@ -7,19 +7,15 @@
 
   <title>lit-element-datepicker demo</title>
 
+  <script type="module" src="./two-calendars.ts"></script>
+
 </head>
 
 <body>
-  <div id="demo"></div>
-
-  <script type="module">
-    import { html, render } from 'https://unpkg.com/lit-html?module'; // workaround until owc-dev-server supports html
-    import './two-calendars.js';
-    render(html`
-    <h1>Example 5: Two synchronized calendars</h1>      
+  <div id="demo">
+    <h1>Example 5: Two synchronized calendars</h1>
     <two-calendars></two-calendars>
-    `, document.querySelector('#demo'));
-  </script>
+  </div>
 </body>
 
 </html>

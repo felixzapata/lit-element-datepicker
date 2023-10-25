@@ -6,20 +6,15 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
   <title>lit-element-datepicker demo</title>
+  <script type="module" src="./init-max-date.ts"></script>
 
 </head>
 
 <body>
-  <div id="demo"></div>
-
-  <script type="module">
-    import { html, render } from 'https://unpkg.com/lit-html?module'; // workaround until owc-dev-server supports html
-    import './init-max-date.js';
-    render(html`
+  <div id="demo">
     <h1>Example 4: Set init date and max date</h1>
     <init-max-date></init-max-date>
-    `, document.querySelector('#demo'));
-  </script>
+  </div>
 </body>
 
 </html>

@@ -7,20 +7,15 @@
 
   <title>lit-element-datepicker demo</title>
 
+  <script type="module" src="./init-date.ts"></script>
+
 </head>
 
 <body>
-  <div id="demo"></div>
-
-  <script type="module">
-    import { html, render } from 'https://unpkg.com/lit-html?module'; // workaround until owc-dev-server supports html
-    import './init-date.js';
-    render(html`
+  <div id="demo">
     <h1>Example 3: Set initial date</h1>
     <init-date></init-date>
-    `, document.querySelector('#demo'));
-  </script>
-
+  </div>
 </body>
 
 </html>

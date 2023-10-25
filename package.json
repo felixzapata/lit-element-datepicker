@@ -1,17 +1,20 @@
 {
+  "private": true,
+  "type": "module",
   "name": "lit-element-datepicker",
   "version": "0.0.3",
   "description": "LitElement component component based on the accessible Date Picker from Open Ajax Alliance",
   "main": "lit-element-datepicker.js",
   "module": "lit-element-datepicker.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/felixzapata/lit-element-datepicker.git"
-  },
   "scripts": {
-    "start": "owc-dev-server --open demo",
-    "build": "rollup -c"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest --environment jsdom",
+    "test:ui": "vitest --ui"
   },
+  "author": "Félix Zapata",
+  "license": "MIT",
   "keywords": [
     "a11y",
     "webcomponent",
@@ -21,30 +24,16 @@
     "web-components",
     "web-component"
   ],
-  "author": "Félix Zapata",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/felixzapata/lit-element-datepicker/issues"
-  },
-  "homepage": "https://github.com/felixzapata/lit-element-datepicker#readme",
-  "devDependencies": {
-    "@open-wc/building-rollup": "^0.3.0",
-    "chai": "^4.2.0",
-    "eslint": "^5.6.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-html": "^4.0.6",
-    "eslint-plugin-import": "^2.14.0",
-    "http-server": "^0.11.1",
-    "mocha": "^6.1.4",
-    "owc-dev-server": "^0.3.0",
-    "rimraf": "^2.6.3",
-    "rollup": "^1.10.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "sinon": "^7.3.1"
-  },
   "dependencies": {
-    "lit-element": "^2.0.1",
-    "lit-html": "^1.0.0",
-    "moment": "^2.24.0"
+    "lit": "^3.0.0",
+    "luxon": "3.4.3"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^3.2.0",
+    "@types/luxon": "3.3.3",
+    "jsdom": "22.1.0",
+    "typescript": "5.2.2",
+    "vite": "4.5.0",
+    "vitest": "0.34.6"
   }
 }
