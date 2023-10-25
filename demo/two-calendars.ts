@@ -13,7 +13,11 @@ class TwoCalendars extends LitElement {
   @property({ type: String }) dateFrom = '';
   constructor() {
     super();
-    this.dateFrom = '';
+    this.addEventListener('date-changed', (event: Event) => {
+      // type assertion
+      this._dateChanged(<CustomEvent>event);
+    });
+
   }
   render() {
     return html`

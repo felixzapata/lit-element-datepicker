@@ -156,9 +156,9 @@ export class LitElementDatepicker extends LitElement {
   @property({ type: Boolean }) bModal = false;
   @property({ type: String }) date = '';
   @property({ type: String }) locale = 'en-EN';
-  @property({ type: String }) initDate = '';
-  @property({ type: String }) minDate = '';
-  @property({ type: String }) maxDate = '';
+  @property({ type: String, attribute: 'init-date' }) initDate = '';
+  @property({ type: String, attribute: 'min-date' }) minDate = '';
+  @property({ type: String, attribute: 'max-date' }) maxDate = '';
 
   @query('#dp1') $id!: HTMLElement;
   @query('#month') $monthObj!: HTMLElement;
@@ -1141,9 +1141,6 @@ export class LitElementDatepicker extends LitElement {
     if (changedProperties.has('locale')) {
       this._localizeCalendar(this.locale);
     }
-    if (changedProperties.has('minDate')) {
-      this._minDateChanged(this.minDate);
-    }
     if (
       changedProperties.has('initDate') &&
       typeof changedProperties.get('initDate') !== 'undefined'
@@ -1152,6 +1149,9 @@ export class LitElementDatepicker extends LitElement {
     }
   }
   updated(changedProperties: Map<string, any>) {
+    if (changedProperties.has('minDate')) {
+      this._minDateChanged(this.minDate);
+    }
     if (changedProperties.has('opened')) {
       this._onOpenedChanged();
     }

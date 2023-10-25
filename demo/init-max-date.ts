@@ -8,6 +8,13 @@ class InitMaxDate extends LitElement {
   @query('#date') date!: HTMLInputElement;
 
   @property({ type: Boolean }) opened = false;
+  constructor() {
+    super();
+    this.addEventListener('date-changed', (event: Event) => {
+      // type assertion
+      this._dateChanged(<CustomEvent>event);
+    });
+  }
   render() {
     return html`
       <div role="application">
