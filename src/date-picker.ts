@@ -1,6 +1,17 @@
 import { LitElement, html, css, PropertyValues } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { DateTime, Info } from 'luxon';
+import {
+  type DatePickerDate,
+  getDateFromISO,
+  getDateNow,
+  getDateFromJSDate,
+  getStartWeekDay,
+  getDay,
+  getMonth,
+  getYear,
+  getMonthsNames,
+  getWeekdaysNames
+} from './date-time-helpers.ts';
 import prev from './assets/prev.png';
 import next from './assets/next.png';
 
@@ -132,9 +143,9 @@ export class DatePicker extends LitElement {
   private dayNames: string[] = [];
   private dayNamesAbbr: string[] = [];
   private monthNames: string[] = [];
-  private minDateMoment?: DateTime;
-  private maxDateMoment?: DateTime;
-  private dateObj?: DateTime;
+  private minDateMoment?: DatePickerDate;
+  private maxDateMoment?: DatePickerDate;
+  private dateObj?: DatePickerDate;
   private curYear = 0;
   private year = 0;
   private curMonth = 0;
@@ -187,9 +198,9 @@ export class DatePicker extends LitElement {
   }
 
   _localizeCalendar(locale: string) {
-    this.dayNames = Info.weekdays('long', { locale });
-    this.dayNamesAbbr = Info.weekdays('short', { locale });
-    this.monthNames = Info.months('long', { locale });
+    this.dayNames = getWeekdaysNames('long', locale);
+    this.dayNamesAbbr = getWeekdaysNames('short', locale);
+    this.monthNames = getMonthsNames('long', locale);
   }
 
   _initDateChanged() {
@@ -199,7 +210,7 @@ export class DatePicker extends LitElement {
 
   _minDateChanged(minDate: string) {
     if (minDate !== '') {
-      this.minDateMoment = DateTime.fromISO(minDate);
+      this.minDateMoment = getDateFromISO(minDate);
       this._checkDatesRange();
       this._updateAvailableDays();
     }
@@ -207,11 +218,11 @@ export class DatePicker extends LitElement {
 
   _renderCalendar() {
     this.dateObj =
-      this.initDate !== '' ? DateTime.fromISO(this.initDate) : DateTime.now();
-    this.curYear = this.dateObj.year;
+      this.initDate !== '' ? getDateFromISO(this.initDate) : getDateNow();
+    this.curYear = getYear(this.dateObj);
     this.year = this.curYear;
 
-    this.curMonth = this.dateObj.month - 1;
+    this.curMonth = getMonth(this.dateObj) - 1;
     this.month = this.curMonth;
     this.currentDate = true;
 
@@ -239,13 +250,13 @@ export class DatePicker extends LitElement {
   _checkDatesRange() {
     this.shouldDisableNext = Boolean(
       this.maxDateMoment &&
-        this.month === this.maxDateMoment?.month &&
-        this.year === this.maxDateMoment?.year
+        this.month === getMonth(this.maxDateMoment) &&
+        this.year === getYear(this.maxDateMoment)
     );
     this.shouldDisablePrev = Boolean(
       this.minDateMoment &&
-        this.month === this.minDateMoment?.month &&
-        this.year === this.minDateMoment?.year
+        this.month === getMonth(this.minDateMoment) &&
+        this.year === getYear(this.minDateMoment)
     );
     this.$next.setAttribute('aria-hidden', this.shouldDisableNext.toString());
     this.$prev.setAttribute('aria-hidden', this.shouldDisablePrev.toString());
@@ -288,7 +299,7 @@ export class DatePicker extends LitElement {
   //
   _popGrid() {
     const numDays = this._calcNumDays(this.year, this.month);
-    const startWeekday = this._calcStartWeekday(this.year, this.month);
+    const startWeekday = this._calcStartWeekday(this.year, this.month, this.locale);
     let weekday = 0;
     let curDay = 1;
     let rowCount = 1;
@@ -296,7 +307,7 @@ export class DatePicker extends LitElement {
     if (!$tbody) {
       return;
     }
-    const dayOfMonth = DateTime.now().day;
+    const dayOfMonth = getDay(getDateNow());
 
     let gridCells = '\t<tr id="row1">\n';
 
@@ -402,12 +413,9 @@ export class DatePicker extends LitElement {
   //
   // @return (integer) number representing the day of the week (0=Sunday....6=Saturday)
   //
-  _calcStartWeekday(year: number, month: number) {
+  _calcStartWeekday(year: number, month: number, locale: string) {
     // 1-7, Monday is 1, Sunday is 7, per ISO
-    return (
-      DateTime.fromJSDate(new Date(year, month, 1)).setLocale(this.locale)
-        .weekday - 1
-    );
+    return (getStartWeekDay(year, month, locale));
   }
 
   //
@@ -562,7 +570,7 @@ export class DatePicker extends LitElement {
       return;
     }
     this.date =
-      DateTime.fromJSDate(
+      getDateFromJSDate(
         new Date(this.year, this.month, window.parseInt(curDay.innerText, 10))
       ).toISO() || '';
     this.dispatchEvent(
@@ -1160,11 +1168,11 @@ export class DatePicker extends LitElement {
 
   firstUpdated() {
     if (this.maxDate !== '') {
-      this.maxDateMoment = DateTime.fromISO(this.maxDate);
+      this.maxDateMoment = getDateFromISO(this.maxDate);
     }
 
     if (this.minDate !== '') {
-      this.minDateMoment = DateTime.fromISO(this.minDate);
+      this.minDateMoment = getDateFromISO(this.minDate);
     }
     this._renderCalendar();
 

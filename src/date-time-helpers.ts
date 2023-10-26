@@ -1,14 +1,14 @@
 import { DateTime, Info } from 'luxon';
 
-function fromISO(date: string) {
+function getDateFromISO(date: string) {
   return DateTime.fromISO(date);
 }
 
-function now() {
+function getDateNow() {
   return DateTime.now();
 }
 
-function fromJSDate(date: Date) {
+function getDateFromJSDate(date: Date) {
   return DateTime.fromJSDate(date);
 }
 
@@ -16,24 +16,39 @@ function toISO(date: DateTime) {
   return date.toISO();
 }
 
-function getWeekdaysNames(locale: string) {
-  return Info.weekdays('long', { locale });
+function getWeekdaysNames(format: 'long' | 'short', locale: string) {
+  return Info.weekdays(format, { locale });
 }
 
-function getMonthsNames(locale: string) {
-  return Info.months('long', { locale });
+function getMonthsNames(format: 'long' | 'short', locale: string) {
+  return Info.months(format, { locale });
 }
 
 function getStartWeekDay(year: number, month: number, locale: string) {
-  return fromJSDate(new Date(year, month, 1)).setLocale(locale).weekday - 1
+  return getDateFromJSDate(new Date(year, month, 1)).setLocale(locale).weekday - 1
+}
+
+function getDay(date: DatePickerDate) {
+  return date.day;
+}
+
+function getMonth(date: DatePickerDate) {
+  return date.month;
+}
+
+function getYear(date: DatePickerDate) {
+  return date.year;
 }
 
 export type DatePickerDate = DateTime;
 
 export {
-  fromISO,
-  now,
-  fromJSDate,
+  getDay,
+  getMonth,
+  getYear,
+  getDateFromISO,
+  getDateNow,
+  getDateFromJSDate,
   getStartWeekDay,
   getMonthsNames,
   getWeekdaysNames,
