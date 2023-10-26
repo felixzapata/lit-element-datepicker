@@ -143,8 +143,8 @@ export class DatePicker extends LitElement {
   private dayNames: string[] = [];
   private dayNamesAbbr: string[] = [];
   private monthNames: string[] = [];
-  private minDateMoment?: DatePickerDate;
-  private maxDateMoment?: DatePickerDate;
+  private minDateObj?: DatePickerDate;
+  private maxDateObj?: DatePickerDate;
   private dateObj?: DatePickerDate;
   private curYear = 0;
   private year = 0;
@@ -210,7 +210,7 @@ export class DatePicker extends LitElement {
 
   _minDateChanged(minDate: string) {
     if (minDate !== '') {
-      this.minDateMoment = getDateFromISO(minDate);
+      this.minDateObj = getDateFromISO(minDate);
       this._checkDatesRange();
       this._updateAvailableDays();
     }
@@ -249,14 +249,14 @@ export class DatePicker extends LitElement {
    * */
   _checkDatesRange() {
     this.shouldDisableNext = Boolean(
-      this.maxDateMoment &&
-        this.month === getMonth(this.maxDateMoment) &&
-        this.year === getYear(this.maxDateMoment)
+      this.maxDateObj &&
+        this.month === getMonth(this.maxDateObj) &&
+        this.year === getYear(this.maxDateObj)
     );
     this.shouldDisablePrev = Boolean(
-      this.minDateMoment &&
-        this.month === getMonth(this.minDateMoment) &&
-        this.year === getYear(this.minDateMoment)
+      this.minDateObj &&
+        this.month === getMonth(this.minDateObj) &&
+        this.year === getYear(this.minDateObj)
     );
     this.$next.setAttribute('aria-hidden', this.shouldDisableNext.toString());
     this.$prev.setAttribute('aria-hidden', this.shouldDisablePrev.toString());
@@ -381,15 +381,15 @@ export class DatePicker extends LitElement {
     for (i = 0; i < len; i++) {
       days[i].classList.remove('disabled');
     }
-    if (this.maxDateMoment && this.shouldDisableNext) {
-      day = this.maxDateMoment.day;
+    if (this.maxDateObj && this.shouldDisableNext) {
+      day = this.maxDateObj.day;
       for (i = day; i < len; i++) {
         days[i].classList.add('disabled');
       }
       active = 'day' + days[0].firstChild?.nodeValue;
     }
-    if (this.minDateMoment && this.shouldDisablePrev) {
-      day = this.minDateMoment.day;
+    if (this.minDateObj && this.shouldDisablePrev) {
+      day = this.minDateObj.day;
       for (i = 0; i < day; i++) {
         days[i].classList.add('disabled');
       }
@@ -1168,11 +1168,11 @@ export class DatePicker extends LitElement {
 
   firstUpdated() {
     if (this.maxDate !== '') {
-      this.maxDateMoment = getDateFromISO(this.maxDate);
+      this.maxDateObj = getDateFromISO(this.maxDate);
     }
 
     if (this.minDate !== '') {
-      this.minDateMoment = getDateFromISO(this.minDate);
+      this.minDateObj = getDateFromISO(this.minDate);
     }
     this._renderCalendar();
 
