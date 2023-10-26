@@ -51,7 +51,7 @@ describe('date-picker', () => {
     expect(datePicker?.querySelector('#month')?.firstChild?.nodeValue).to.equal('February 2013');
     expect(table?.querySelectorAll('tbody .empty').length).to.equal(7);
     expect(table?.querySelectorAll('tbody td[id]').length).to.equal(28);
-    expect(table?.querySelector('#day24')?.classList.contains('today')).to.equal(true);
+    expect(table?.querySelector('#day8')?.classList.contains('today')).to.equal(true);
   });
   it('should set a calendar with a min date of February 08, 2013 and max date of April 08, 2013', async () => {
     var element = await fixture(html`
@@ -64,7 +64,7 @@ describe('date-picker', () => {
     expect(table?.querySelectorAll('tbody .empty').length).to.equal(4);
     expect(table?.querySelectorAll('tbody .disabled').length).to.equal(11);
     expect(table?.querySelectorAll('tbody td[id]').length).to.equal(31);
-    expect(table?.querySelector('#day24')?.classList.contains('today')).to.equal(true);
+    expect(table?.querySelector('#day8')?.classList.contains('today')).to.equal(true);
     expect(datePicker?.querySelector('#bn_prev')?.getAttribute('aria-hidden')).to.equal('true');
     expect(datePicker?.querySelector('#bn_next')?.getAttribute('aria-hidden')).to.equal('false');
   });
@@ -79,7 +79,7 @@ describe('date-picker', () => {
     expect(table?.querySelectorAll('tbody .empty').length).to.equal(4);
     expect(table?.querySelectorAll('tbody .disabled').length).to.equal(11);
     expect(table?.querySelectorAll('tbody td[id]').length).to.equal(31);
-    expect(table?.querySelector('#day24')?.classList.contains('today')).to.equal(true);
+    expect(table?.querySelector('#day8')?.classList.contains('today')).to.equal(true);
     expect(datePicker?.querySelector('#bn_prev')?.getAttribute('aria-hidden')).to.equal('true');
     expect(datePicker?.querySelector('#bn_next')?.getAttribute('aria-hidden')).to.equal('false');
   });

@@ -144,7 +144,7 @@ export class DatePicker extends LitElement {
   private monthNames: string[] = [];
   private minDateObj?: DatePickerDate;
   private maxDateObj?: DatePickerDate;
-  private dateObj?: DatePickerDate;
+  private dateObj!: DatePickerDate;
   private curYear = 0;
   private year = 0;
   private curMonth = 0;
@@ -306,7 +306,7 @@ export class DatePicker extends LitElement {
     if (!$tbody) {
       return;
     }
-    const dayOfMonth = getDay(getDateNow());
+    const dayOfMonth = getDay(this.dateObj);
 
     let gridCells = '\t<tr id="row1">\n';
 
