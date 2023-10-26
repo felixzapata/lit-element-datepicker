@@ -569,10 +569,7 @@ export class DatePicker extends LitElement {
     if (!curDay) {
       return;
     }
-    this.date =
-      getDateFromJSDate(
-        new Date(this.year, this.month, window.parseInt(curDay.innerText, 10))
-      ).toISO() || '';
+    this.date = new Date(this.year, this.month, window.parseInt(curDay.innerText, 10)).toISOString() || '';
     this.dispatchEvent(
       new window.CustomEvent('date-changed', {
         composed: true,
