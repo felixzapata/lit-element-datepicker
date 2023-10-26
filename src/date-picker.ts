@@ -150,7 +150,7 @@ export class DatePicker extends LitElement {
   private year = 0;
   private curMonth = 0;
   private month = 0;
-  private currentDate = false;
+  private isCurrentMonth = false;
 
   private shouldDisableNext = false;
   private shouldDisablePrev = false;
@@ -224,7 +224,7 @@ export class DatePicker extends LitElement {
 
     this.curMonth = getMonth(this.dateObj) - 1;
     this.month = this.curMonth;
-    this.currentDate = true;
+    this.isCurrentMonth = true;
 
     // display the current month
     this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
@@ -321,7 +321,7 @@ export class DatePicker extends LitElement {
 
     // insert the days of the month.
     for (curDay = 1; curDay <= numDays; curDay++) {
-      if (curDay === dayOfMonth && this.currentDate === true) {
+      if (curDay === dayOfMonth && this.isCurrentMonth === true) {
         // eslint-disable-next-line
         gridCells +=
           '\t\t<td id="day' +
@@ -442,9 +442,9 @@ export class DatePicker extends LitElement {
     }
 
     if (this.month !== this.curMonth || this.year !== this.curYear) {
-      this.currentDate = false;
+      this.isCurrentMonth = false;
     } else {
-      this.currentDate = true;
+      this.isCurrentMonth = true;
     }
 
     // populate the calendar grid
@@ -488,9 +488,9 @@ export class DatePicker extends LitElement {
     }
 
     if (this.month !== this.curMonth || this.year !== this.curYear) {
-      this.currentDate = false;
+      this.isCurrentMonth = false;
     } else {
-      this.currentDate = true;
+      this.isCurrentMonth = true;
     }
 
     // populate the calendar grid
@@ -525,9 +525,9 @@ export class DatePicker extends LitElement {
     // decrement the year
     this.year -= 1;
     if (this.month !== this.curMonth || this.year !== this.curYear) {
-      this.currentDate = false;
+      this.isCurrentMonth = false;
     } else {
-      this.currentDate = true;
+      this.isCurrentMonth = true;
     }
     // populate the calendar grid
     this._popGrid();
@@ -549,9 +549,9 @@ export class DatePicker extends LitElement {
     // increment the year
     this.year += 1;
     if (this.month !== this.curMonth || this.year !== this.curYear) {
-      this.currentDate = false;
+      this.isCurrentMonth = false;
     } else {
-      this.currentDate = true;
+      this.isCurrentMonth = true;
     }
     // populate the calendar grid
     this._popGrid();
