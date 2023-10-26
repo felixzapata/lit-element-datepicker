@@ -12,26 +12,30 @@ function fromJSDate(date: Date) {
   return DateTime.fromJSDate(date);
 }
 
-function setLocale(locale: string) {
-  return DateTime.local().setLocale(locale);
-}
-
 function toISO(date: DateTime) {
   return date.toISO();
 }
 
-function weekdays(locale: string) {
+function getWeekdaysNames(locale: string) {
   return Info.weekdays('long', { locale });
 }
 
-function months(locale: string) {
+function getMonthsNames(locale: string) {
   return Info.months('long', { locale });
 }
 
-export type DateWrapper = DateTime;
+function getStartWeekDay(year: number, month: number, locale: string) {
+  return fromJSDate(new Date(year, month, 1)).setLocale(locale).weekday - 1
+}
+
+export type DatePickerDate = DateTime;
 
 export {
   fromISO,
   now,
   fromJSDate,
+  getStartWeekDay,
+  getMonthsNames,
+  getWeekdaysNames,
+  toISO,
 };
