@@ -1,10 +1,10 @@
-# \<lit-element-datepicker\>
+# \<date-picker\>
 LitElement component based on the [polymer-openajax-datepicker](https://github.com/felixzapata/polymer-openajax-datepicker).
 
 ## Installation
 
 ```sh
-$ npm install lit-element-datepicker --save
+$ npm install date-picker --save
 ```
 
 ## Properties

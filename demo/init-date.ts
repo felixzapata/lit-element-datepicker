@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { property, query, customElement } from 'lit/decorators.js';
 import { DateTime } from 'luxon';
-import '../src/lit-element-datepicker';
+import '../src/date-picker';
 
 @customElement('init-date')
 class InitDate extends LitElement {
@@ -22,7 +22,7 @@ class InitDate extends LitElement {
         <input id="date" type="text" />
         <button type="button" @click="${this._openCalendar}">Select Date...</button>
       </div>
-      <lit-element-datepicker id="datePicker" ?opened="${this.opened}" init-date="2013-02-08"></lit-element-datepicker>
+      <date-picker id="datePicker" ?opened="${this.opened}" init-date="2013-02-08"></date-picker>
     `;
   }
   _dateChanged(event: CustomEvent) {

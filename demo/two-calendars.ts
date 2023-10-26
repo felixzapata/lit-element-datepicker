@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { property, query, customElement } from 'lit/decorators.js';
 import { DateTime } from 'luxon';
-import '../src/lit-element-datepicker';
+import '../src/date-picker';
 
 @customElement('two-calendars')
 class TwoCalendars extends LitElement {
@@ -26,13 +26,13 @@ class TwoCalendars extends LitElement {
         <input id="date" type="text" />
         <button type="button" id="d1" @click="${this._openFirstCalendar}">Select Date...</button>
       </div>
-      <lit-element-datepicker id="datePicker" init-date="2013-03-08" ?opened="${this.opened}"></lit-element-datepicker>
+      <date-picker id="datePicker" init-date="2013-03-08" ?opened="${this.opened}"></date-picker>
       <div role="application">
         <label for="date2">Date:</label>
         <input id="date2" type="text" />
         <button type="button" id="d2" @click="${this._openSecondCalendar}">Select Date...</button>
       </div>
-      <lit-element-datepicker id="datePicker2" ?opened="${this.opened2}" init-date="${this.dateFrom}" min-date="${this.dateFrom}"></lit-element-datepicker>
+      <date-picker id="datePicker2" ?opened="${this.opened2}" init-date="${this.dateFrom}" min-date="${this.dateFrom}"></date-picker>
     `;
   }
   dateFormat(date: string) {

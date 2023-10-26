@@ -1,8 +1,8 @@
-import { LitElementDatepicker } from '../src/lit-element-datepicker';
+import { DatePicker } from '../src/date-picker';
 import { beforeEach, describe, expect, it, afterEach, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 
-describe('lit-element-datepicker', () => {
+describe('date-picker', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2019, 0, 24));
@@ -13,13 +13,13 @@ describe('lit-element-datepicker', () => {
   });
 
   it('is defined', () => {
-    const el = document.createElement('lit-element-datepicker');
-    expect(el).to.be.instanceOf(LitElementDatepicker);
+    const el = document.createElement('date-picker');
+    expect(el).to.be.instanceOf(DatePicker);
   });
 
   it('should set a calendar with current date on January 24, 2019', async () => {
     var element = await fixture(html`
-      <lit-element-datepicker id="datePicker"></lit-element-datepicker>
+      <date-picker id="datePicker"></date-picker>
     `);
     const datePicker = element.shadowRoot?.querySelector('#dp1');
     const table = datePicker?.querySelector('table');
@@ -31,7 +31,7 @@ describe('lit-element-datepicker', () => {
   });
   it('should set a calendar with current date on 24 enero, 2019', async () => {
     var element = await fixture(html`
-      <lit-element-datepicker id="datePicker" locale="es"></lit-element-datepicker>
+      <date-picker id="datePicker" locale="es"></date-picker>
     `);
     const datePicker = element.shadowRoot?.querySelector('#dp1');
     const table = datePicker?.querySelector('table');
@@ -43,7 +43,7 @@ describe('lit-element-datepicker', () => {
   });
   it('should set a calendar with an init date of February 08, 2013', async () => {
     var element = await fixture(html`
-      <lit-element-datepicker id="datePicker" init-date="2013-02-08"></lit-element-datepicker>
+      <date-picker id="datePicker" init-date="2013-02-08"></date-picker>
     `);
     const datePicker = element.shadowRoot?.querySelector('#dp1');
     const table = datePicker?.querySelector('table');
@@ -55,7 +55,7 @@ describe('lit-element-datepicker', () => {
   });
   it('should set a calendar with a min date of February 08, 2013 and max date of April 08, 2013', async () => {
     var element = await fixture(html`
-      <lit-element-datepicker id="datePicker" init-date="2013-03-08" min-date="2013-02-11" max-date="2013-04-08"></lit-element-datepicker>
+      <date-picker id="datePicker" init-date="2013-03-08" min-date="2013-02-11" max-date="2013-04-08"></date-picker>
     `);
     const datePicker = element.shadowRoot?.querySelector('#dp1');
     const table = datePicker?.querySelector('table');
@@ -70,7 +70,7 @@ describe('lit-element-datepicker', () => {
   });
   it('should set a calendar with a min date of February 08, 2013 and max date of February 29, 2013', async () => {
     var element = await fixture(html`
-      <lit-element-datepicker id="datePicker" init-date="2013-03-08" min-date="2013-02-11" max-date="2013-02-29"></lit-element-datepicker>
+      <date-picker id="datePicker" init-date="2013-03-08" min-date="2013-02-11" max-date="2013-02-29"></date-picker>
     `);
     const datePicker = element.shadowRoot?.querySelector('#dp1');
     const table = datePicker?.querySelector('table');

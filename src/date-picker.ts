@@ -4,8 +4,8 @@ import { DateTime, Info } from 'luxon';
 import prev from './assets/prev.png';
 import next from './assets/next.png';
 
-@customElement('lit-element-datepicker')
-export class LitElementDatepicker extends LitElement {
+@customElement('date-picker')
+export class DatePicker extends LitElement {
   static styles = css`
     host {
       display: block;
@@ -144,7 +144,7 @@ export class LitElementDatepicker extends LitElement {
   private shouldDisableNext = false;
   private shouldDisablePrev = false;
 
-  private _handlerShowDlg = function (this: LitElementDatepicker, e: Event) {
+  private _handlerShowDlg = function (this: DatePicker, e: Event) {
     // ensure focus remains on the dialog
     this.$grid.focus();
     // Consume all mouse events and do nothing
@@ -1181,6 +1181,6 @@ export class LitElementDatepicker extends LitElement {
 }
 declare global {
   interface HTMLElementTagNameMap {
-    'lit-element-datepicker': LitElementDatepicker;
+    'date-picker': DatePicker;
   }
 }

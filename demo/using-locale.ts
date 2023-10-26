@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { property, query, customElement } from 'lit/decorators.js';
 import { DateTime } from 'luxon';
-import { LitElementDatepicker } from '../src/lit-element-datepicker';
+import { DatePicker } from '../src/date-picker';
 
 @customElement('using-locale')
 class UsingLocale extends LitElement {
@@ -12,7 +12,7 @@ class UsingLocale extends LitElement {
       },
     };
   }
-  @query('#datePicker') calendar!: LitElementDatepicker;
+  @query('#datePicker') calendar!: DatePicker;
   @query('#date') date!: HTMLInputElement;
   @property({ type: String }) locale = 'es';
   @property({ type: Boolean }) opened = false;
@@ -32,7 +32,7 @@ class UsingLocale extends LitElement {
         <input id="date" type="text" />
         <button type="button" @click="${this._openCalendar}">Select Date...</button>
       </div>
-      <lit-element-datepicker id="datePicker" locale="${this.locale}"></lit-element-datepicker>
+      <date-picker id="datePicker" locale="${this.locale}"></date-picker>
     `;
   }
   dateFormat(date: string) {

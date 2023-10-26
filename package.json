@@ -1,11 +1,11 @@
 {
   "private": true,
   "type": "module",
-  "name": "lit-element-datepicker",
+  "name": "date-picker",
   "version": "0.0.3",
   "description": "LitElement component component based on the accessible Date Picker from Open Ajax Alliance",
-  "main": "lit-element-datepicker.js",
-  "module": "lit-element-datepicker.js",
+  "main": "date-picker.js",
+  "module": "date-picker.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
