@@ -4,7 +4,6 @@ import {
   type DatePickerDate,
   getDateFromISO,
   getDateNow,
-  getDateFromJSDate,
   getStartWeekDay,
   getDay,
   getMonth,
@@ -34,15 +33,15 @@ export class DatePicker extends LitElement {
       margin: 10px;
       padding: 2px;
       position: absolute;
-      z-index: var(--datepicker-zindex);
-      width: var(--datepicker-width);
-      background-color: var(--datepicker-background-color);
+      z-index: 1000;
+      width: 261px;
+      background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
     div#month-wrap {
       height: 30px;
-      background-color: var(--datepicker-month-color);
+      background-color: #ddd;
       border: 1px solid black;
       border-radius: 4px;
     }
@@ -63,7 +62,7 @@ export class DatePicker extends LitElement {
     div#bn_next:hover,
     div#bn_next:focus {
       margin: 2px;
-      background-color: var(--datepicker-buttons-hover);
+      background-color: #fff;
       border: 1px solid #800;
       border-radius: 4px;
     }
@@ -92,18 +91,18 @@ export class DatePicker extends LitElement {
       padding: 0;
     }
     table#cal td {
-      background-color: var(--datepicker-cells-color);
+      background-color: #ddd;
       border: 1px solid #999;
     }
     table#cal td.today {
-      background-color: var(--datepicker-currentday-color);
+      background-color: #FFF0C4;
       border: 1px solid #999;
     }
     table#cal td.disabled {
       color: #999;
     }
     table#cal td.empty, table#cal td.disabled {
-      background-color: var(--datepicker-cellempty-color);
+      background-color: #f9f9f9;
       border: 1px solid #eee;
     }
     table#cal td:hover,
