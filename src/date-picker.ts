@@ -17,7 +17,7 @@ import next from './assets/next.png';
 @customElement('date-picker')
 export class DatePicker extends LitElement {
   static styles = css`
-    host {
+    :host {
       display: block;
       --datepicker-background-color: #fff;
       --datepicker-month-color: #ddd;
@@ -33,15 +33,15 @@ export class DatePicker extends LitElement {
       margin: 10px;
       padding: 2px;
       position: absolute;
-      z-index: 1000;
-      width: 261px;
-      background-color: #fff;
+      z-index: var(--datepicker-zindex);
+      width: var(--datepicker-width);
+      background-color: var(--datepicker-background-color);
       border: 1px solid #ccc;
       border-radius: 4px;
     }
     div#month-wrap {
       height: 30px;
-      background-color: #ddd;
+      background-color: var(--datepicker-month-color);
       border: 1px solid black;
       border-radius: 4px;
     }
@@ -62,7 +62,7 @@ export class DatePicker extends LitElement {
     div#bn_next:hover,
     div#bn_next:focus {
       margin: 2px;
-      background-color: #fff;
+      background-color: var(--datepicker-background-color);
       border: 1px solid #800;
       border-radius: 4px;
     }
@@ -91,27 +91,27 @@ export class DatePicker extends LitElement {
       padding: 0;
     }
     table#cal td {
-      background-color: #ddd;
+      background-color: var(--datepicker-cells-color);
       border: 1px solid #999;
     }
     table#cal td.today {
-      background-color: #FFF0C4;
+      background-color: var(--datepicker-currentday-color);
       border: 1px solid #999;
     }
     table#cal td.disabled {
       color: #999;
     }
     table#cal td.empty, table#cal td.disabled {
-      background-color: #f9f9f9;
+      background-color: var(--datepicker-cellempty-color);
       border: 1px solid #eee;
     }
     table#cal td:hover,
     table#cal td.focus {
       border-color: #800;
-      background-color: #fc3;
+      background-color: var(--datepicker-buttons-hover);
     }
     table#cal td.empty:hover, table#cal td.disabled:hover {
-      background-color: #f9f9f9;
+      background-color: var(--datepicker-cellempty-color);
       border: 1px solid #eee;
     }
     .offscreen {
